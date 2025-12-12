@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Registro de Usuario/Cliente</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+   <!--Lo primero que estoy haciendo es hacer tu Html semantico y estoy usando una
+   metodologia llamada BEM (Bloque__Elemento--Modificador) es para hacer mas entendible
+   tu HTML-->
+
+   <!-- Encabezado principal de la página -->
+   <header class="header">
+      <!-- Título que aparece arriba en la interfaz -->
+      <h1 class="header__titulo">Registro de Usuario/Cliente</h1>
+   </header>
+
+   <!-- Contenido principal de la página -->
+   <main class="main-content">
+
+      <!-- SECCIÓN DEL FORMULARIO DE REGISTRO -->
+      <section class="registro">
+
+         <!-- Título de la sección de registro -->
+         <h2 class="registro__titulo">Registro del Usuario</h2>
+
+         <!-- Formulario donde el usuario ingresará sus datos -->
+         <!-- El atributo novalidate desactiva la validación automática del navegador
+         para poder manejar nosotros los errores con JavaScript -->
+         <form id="formRegistroUsuario" class="registro__formulario" novalidate>
+
+            <!-- FIELDSET agrupa campos relacionados -->
+            <fieldset class="formulario-grupo">
+
+               <!-- LEYENDA que aparece encima del recuadro del fieldset -->
+               <legend class="formulario-grupo__leyenda">Datos Personales</legend>
+
+               <!-- Cada DIV representa un campo individual del formulario -->
+               <!-- El modificador --inline indica que van alineados horizontalmente en CSS -->
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="nombre" class="formulario-grupo__etiqueta">Nombre:</label>
+
+                  <!-- Campo para escribir el nombre, requerido y con mínimo 3 caracteres -->
+                  <input 
+                     type="text" id="nombre" name="nombre" 
+                     required minlength="3" 
+                     class="formulario-grupo__input"
+                     placeholder="Eduardo">
+               </div>
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="apellidoPaterno" class="formulario-grupo__etiqueta">Apellido Paterno:</label>
+
+                  <!-- Campo obligatorio -->
+                  <input 
+                     type="text" id="apellidoPaterno" name="apellidoPaterno" 
+                     required 
+                     class="formulario-grupo__input"
+                     placeholder="Gonalez">
+               </div>
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="apellidoMaterno" class="formulario-grupo__etiqueta">Apellido Materno:</label>
+
+                  <!-- Este campo NO es obligatorio -->
+                  <input 
+                     type="text" id="apellidoMaterno" name="apellidoMaterno" 
+                     class="formulario-grupo__input"
+                     placeholder="Martinez"
+                     required>
+               </div>
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="fechaNacimiento" class="formulario-grupo__etiqueta">Fecha de Nacimiento:</label>
+
+                  <!-- Input tipo fecha -->
+                  <input 
+                     type="text" id="fechaNacimiento" name="fechaNacimiento" 
+                     class="formulario-grupo__input"
+                     placeholder="dd/mm/aaaa"
+                     maxlength="10"
+                     required>
+               </div>
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="direccion" class="formulario-grupo__etiqueta">Dirección:</label>
+
+                  <!-- Campo de texto para dirección -->
+                  <input 
+                     type="text" id="direccion" name="direccion" 
+                     class="formulario-grupo__input"
+                     placeholder="Calle 5 #101 Col. Centro"
+                     required>
+               </div>
+
+               <div class="formulario-grupo__campo formulario-grupo__campo--inline">
+                  <label for="telefono" class="formulario-grupo__etiqueta">Teléfono:</label>
+
+                  <!-- Input tipo teléfono -->
+                  <input 
+                     type="tel" id="telefono" name="telefono" 
+                     class="formulario-grupo__input"
+                     placeholder="783-112-2354"
+                     required>
+               </div>
+
+            </fieldset>
+
+            <!-- BOTONES DE ACCIÓN DEL FORMULARIO -->
+            <div class="registro__acciones">
+
+               <!-- Botón para enviar el formulario -->
+               <button type="submit" class="boton boton--guardar">Guardar datos</button>
+
+               <!-- Botón para limpiar todos los campos -->
+               <button type="reset" class="boton boton--limpiar">Limpiar campos</button>
+            </div>
+
+            <!-- Pequeña nota aclaratoria -->
+            <small class="registro__nota">*Campos obligatorios*</small>
+
+            <!-- Aquí aparecerán los mensajes de error o éxito desde JavaScript -->
+            <div id="mensaje" class="registro__mensaje"></div>
+
+         </form>
+      </section>
+
+      <!-- SECCIÓN DONDE SE MUESTRAN LOS CLIENTES REGISTRADOS -->
+      <section class="listado">
+
+         <!-- Título de la tabla -->
+         <h2 class="listado__titulo">Clientes registrados</h2>
+
+         <!-- Tabla donde se muestran los registros cargados o guardados en JSON -->
+         <table id="tablaClientes" class="listado__tabla tabla-clientes">
+
+            <!-- Encabezados de la tabla -->
+            <thead class="tabla-clientes__cabecera">
+               <tr>
+                  <th class="tabla-clientes__encabezado">#</th>
+                  <th class="tabla-clientes__encabezado">Nombre</th>
+                  <th class="tabla-clientes__encabezado">Apellido Paterno</th>
+                  <th class="tabla-clientes__encabezado">Apellido Materno</th>
+                  <th class="tabla-clientes__encabezado">Fecha de Nacimiento</th>
+                  <th class="tabla-clientes__encabezado">Dirección</th>
+                  <th class="tabla-clientes__encabezado">Teléfono</th>
+                  <th class="tabla-clientes__encabezado">Fecha Registro</th>
+               </tr>
+            </thead>
+
+            <!-- Cuerpo de la tabla con datos de ejemplo -->
+            <!-- En la versión final esta parte se llenará automáticamente desde JavaScript -->
+            <tbody class="tabla-clientes__cuerpo">
+               
+            </tbody>
+         </table>
+
+      </section>
+
+      <!-- Archivo JavaScript que maneja la lógica del formulario y la tabla -->
+      <script src="script.js"></script>
+
+   </main>
+
+</body>
+</html>
